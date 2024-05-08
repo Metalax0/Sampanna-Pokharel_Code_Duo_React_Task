@@ -4,6 +4,7 @@ import { NotificationProps } from "./types/notificationTypes";
 import { Provider } from "react-redux";
 import { AppRoutes } from "./routes/app-routes";
 import { notification } from "antd";
+import store from "./state-management/store";
 
 export const NotificationContext = React.createContext<NotificationProps>({
     openNotification: () => {},
@@ -36,9 +37,9 @@ function App() {
     return (
         <NotificationContext.Provider value={contextValue}>
             {contextHolder}
-            {/* <Provider store={store}> */}
-            <AppRoutes />
-            {/* </Provider> */}
+            <Provider store={store}>
+                <AppRoutes />
+            </Provider>
         </NotificationContext.Provider>
     );
 }
