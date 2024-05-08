@@ -1,3 +1,3 @@
 export const apiRoutes = {
-    fetchAllSpells: "",
+    fetchAllSpells: "/api/spells",
 };

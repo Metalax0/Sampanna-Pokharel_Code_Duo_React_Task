@@ -26,14 +26,30 @@
     /* Color Schemes for Light Theme (Default) */
     --bg-color: #ffa68d;
     --fg-color: #1c1c1c;
+    --card-bg: #fab8a5;
 }
 
 /* Color Schemes for Dark Theme */
 [theme="dark"] {
     --bg-color: #1c1c1c;
     --fg-color: #ffa68d;
+    --card-bg: #141313;
 }
 
-/* * {
-    outline: 2px solid red;
-} */
+/* Antd Designs Overrides */
+
+.ant-pagination-item a {
+    color: var(--fg-color) !important;
+}
+
+.ant-pagination-item-active a {
+    color: var(--bg-color) !important;
+}
+
+.ant-pagination-item-ellipsis {
+    color: var(--fg-color) !important;
+}
+
+.ant-pagination-item-active {
+    background-color: var(--fg-color) !important;
+}

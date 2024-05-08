@@ -9,7 +9,7 @@ export const AppRoutes = () => (
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<LandingPage />}></Route>
-                <Route path="/spell/:spellid" element={<SpellPage />}></Route>
+                <Route path="/spell/:index" element={<SpellPage />}></Route>
                 <Route path="*" element={<ErrorPage />}></Route>
             </Route>
         </Routes>

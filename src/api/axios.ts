@@ -1,22 +1,32 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, {
+    AxiosRequestConfig,
+    AxiosResponse,
+    InternalAxiosRequestConfig,
+} from "axios";
 
 // Create an Axios instance with default configuration
 const api = axios.create({
-    baseURL: "https://api.dev.moxicrafts.com",
+    baseURL: "https://www.dnd5eapi.co",
     timeout: 10000,
-    // withCredentials: true,
 });
 
 // REQUEST INTERCEPTORS
-api.interceptors.request.use((error) => {
-    // Navigate to Error page and send error message
-    console.error("Request Error Interceptor:", error);
-    return Promise.reject(error);
-});
+api.interceptors.request.use(
+    (config: InternalAxiosRequestConfig) => {
+        // Request interception code here
+        return config;
+    },
+    (error) => {
+        // Navigate to Error page and send error message
+        console.error("Request Error Interceptor:", error);
+        return Promise.reject(error);
+    }
+);
 
 // RESPONSE INTERCEPTORS
 api.interceptors.response.use(
     (response: AxiosResponse) => {
+        // Response interception code here
         return response;
     },
     (error) => {

@@ -1,0 +1,10 @@
+.spell-card {
+    width: 200px;
+    background-color: var(--card-bg);
+    box-shadow: 5px 5px 5px var(--fg-color);
+    padding: 3px;
+}
+
+.spell-details {
+    /* display: flex; */
+}

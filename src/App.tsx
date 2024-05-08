@@ -3,8 +3,8 @@ import "./App.css";
 import { NotificationProps } from "./types/notificationTypes";
 import { Provider } from "react-redux";
 import { AppRoutes } from "./routes/app-routes";
-import { notification } from "antd";
 import store from "./state-management/store";
+import { notification } from "antd";
 
 export const NotificationContext = React.createContext<NotificationProps>({
     openNotification: () => {},

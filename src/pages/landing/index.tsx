@@ -1,18 +1,10 @@
-import { useEffect } from "react";
 import "./style.css";
-import { useAPI } from "../../hooks/useAPI";
-import { apiRoutes } from "../../api/apiRoutes";
+import { SpellCardCollection } from "../../components/organisms/spell-card-collection";
 
 export const LandingPage = () => {
-    const spellsAPI = useAPI();
-
-    useEffect(() => {
-        // spellsAPI.API("GET", apiRoutes.fetchAllSpells);
-    }, []);
-
     return (
-        <div>
-            <h1>LandingPage</h1>
+        <div className="landing">
+            <SpellCardCollection />
         </div>
     );
 };
