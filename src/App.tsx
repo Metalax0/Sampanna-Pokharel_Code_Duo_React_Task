@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useCallback, useMemo } from "react";
+import "./App.css";
+import { NotificationProps } from "./types/notificationTypes";
+import { Provider } from "react-redux";
+import { AppRoutes } from "./routes";
+import { notification } from "antd";
+
+export const NotificationContext = React.createContext<NotificationProps>({
+    openNotification: () => {},
+});
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [api, contextHolder] = notification.useNotification();
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const openNotification = useCallback(
+        (
+            title: string,
+            message: string,
+            type: "success" | "info" | "warning" | "error"
+        ) => {
+            api[type]({
+                message: title,
+                description: `${message}!`,
+            });
+        },
+        [api]
+    );
+
+    const contextValue = useMemo(
+        () => ({
+            openNotification,
+        }),
+        [openNotification]
+    );
+
+    return (
+        <NotificationContext.Provider value={contextValue}>
+            {contextHolder}
+            {/* <Provider store={store}> */}
+            <AppRoutes />
+            {/* </Provider> */}
+        </NotificationContext.Provider>
+    );
 }
 
-export default App
+export default App;
