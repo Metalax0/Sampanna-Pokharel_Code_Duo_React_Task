@@ -7,6 +7,10 @@ export const Layout = () => {
         <div className="layout">
             <Navbar />
             <Outlet />
+            <br />
+            <small>
+                <i>Build by Sampanna Pokharel</i>
+            </small>
         </div>
     );
 };

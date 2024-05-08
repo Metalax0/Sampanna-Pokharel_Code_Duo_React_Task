@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import uiSlice from "../slices/uiSlice";
+import favoriteSlice from "../slices/favoriteSlice";
 
 const store = configureStore({
     reducer: {
         ui: uiSlice,
-        // spells: spellsSlice,
+        favorite: favoriteSlice,
     },
 });
 

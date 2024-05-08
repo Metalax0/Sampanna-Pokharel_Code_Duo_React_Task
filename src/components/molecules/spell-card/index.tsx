@@ -3,18 +3,20 @@ import { SpellCardProps } from "../../../types/spellCardPropsType";
 import { useEffect } from "react";
 import { useAPI } from "../../../hooks/useAPI";
 import { Spin } from "antd";
+import { useDispatch } from "react-redux";
+import { setFavorite } from "../../../state-management/slices/favoriteSlice";
+import { AppDispatch } from "../../../state-management/store";
 
 export const SpellCard = ({ url, index }: SpellCardProps) => {
     const spellsAPI = useAPI();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         spellsAPI.API("GET", url);
     }, []);
 
     const handleToggleFavorites = () => {
-        // dispatch
-        // add to localstorage
-        // localStorage.setItem("");
+        dispatch(setFavorite(index));
     };
 
     return (
