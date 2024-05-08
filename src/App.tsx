@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import "./App.css";
 import { NotificationProps } from "./types/notificationTypes";
 import { Provider } from "react-redux";
-import { AppRoutes } from "./routes";
+import { AppRoutes } from "./routes/app-routes";
 import { notification } from "antd";
 
 export const NotificationContext = React.createContext<NotificationProps>({
