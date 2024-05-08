@@ -4,9 +4,13 @@ import "./style.css";
 
 export const Layout = () => {
     return (
-        <div>
+        <div className="layout">
             <Navbar />
             <Outlet />
+            <br />
+            <small>
+                <i>Build by Sampanna Pokharel</i>
+            </small>
         </div>
     );
 };

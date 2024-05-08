@@ -1,8 +1,14 @@
+* {
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
 #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 0;
+    padding: 0;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 :root {
@@ -10,12 +16,43 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    color: var(--fg-color);
+    background-color: var(--bg-color);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* Color Schemes for Light Theme (Default) */
+    --bg-color: #ffa68d;
+    --fg-color: #1c1c1c;
+    --card-bg: #fab8a5;
+    --gradient-card-bg: linear-gradient(45deg, #fab8a5, #ddd6b4);
+}
+
+/* Color Schemes for Dark Theme */
+[theme="dark"] {
+    --bg-color: #1c1c1c;
+    --fg-color: #ffa68d;
+    --card-bg: #141313;
+    --gradient-card-bg: linear-gradient(45deg, #302b2b, #000000);
+}
+
+/* Antd Designs Overrides */
+
+.ant-pagination-item a {
+    color: var(--fg-color) !important;
+}
+
+.ant-pagination-item-active a {
+    color: var(--bg-color) !important;
+}
+
+.ant-pagination-item-ellipsis {
+    color: var(--fg-color) !important;
+}
+
+.ant-pagination-item-active {
+    background-color: var(--fg-color) !important;
 }

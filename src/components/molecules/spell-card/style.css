@@ -1,0 +1,65 @@
+.spell-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 400px;
+    /* background-color: var(--card-bg); */
+    background: var(--gradient-card-bg);
+    box-shadow: 5px 5px 5px var(--fg-color);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.spell-card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    filter: invert(1);
+}
+
+.spell-details-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.spell-details-col {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.spell-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.spell-stat-sub {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+@media (min-width: 360px) {
+    .spell-card {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 430px) {
+    .spell-card {
+        width: 350px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 744px) {
+    .spell-card {
+        width: 350px;
+        height: 450px;
+        font-size: 1.2rem;
+    }
+}

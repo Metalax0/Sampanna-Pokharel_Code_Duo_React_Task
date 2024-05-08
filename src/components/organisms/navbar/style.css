@@ -1,0 +1,42 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    padding: 5px 0;
+}
+
+.nav-logo {
+    width: 250px;
+}
+
+.nav-logo:hover,
+.nav-favorites:hover {
+    cursor: pointer;
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-favorites {
+    width: 25px;
+    height: 25px;
+    color: red;
+    fill: red;
+}
+
+@media (min-width: 360px) {
+    .navbar {
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 430px) {
+    .nav-logo {
+        width: 300px;
+    }
+}
