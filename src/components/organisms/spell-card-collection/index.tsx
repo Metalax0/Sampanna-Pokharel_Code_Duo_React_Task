@@ -4,6 +4,9 @@ import { useAPI } from "../../../hooks/useAPI";
 import { SpellCard } from "../../molecules/spell-card";
 import { apiRoutes } from "../../../api/apiRoutes";
 import { Pagination, Spin } from "antd";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../state-management/store";
+import { isIndexFavorite } from "../../../utils/isIndexFavorite";
 
 export enum SpellCardCollectionEnum {
     all = "all",
@@ -20,6 +23,9 @@ export const SpellCardCollection = ({ type }: SpellCardCollectionPropsType) => {
         page: 0,
         itemsPerPage: 10,
     });
+    const favoriteStoreArr = useSelector(
+        (state: RootState) => state.favorite.arr
+    );
 
     useEffect(() => {
         spellsAPI.API("GET", apiRoutes.fetchAllSpells);
@@ -46,6 +52,25 @@ export const SpellCardCollection = ({ type }: SpellCardCollectionPropsType) => {
         return cardArr;
     };
 
+    const renderFavoriteSpells = () => {
+        const selectedIndex: any[] = [];
+
+        spellsAPI.data.results.map((data: { index: string }, i: unknown) => {
+            if (isIndexFavorite(favoriteStoreArr, data.index))
+                selectedIndex.push(i);
+        });
+
+        const newArr = selectedIndex.map((i) => (
+            <SpellCard
+                key={spellsAPI.data.results[i].url + i}
+                url={spellsAPI.data.results[i].url}
+                index={spellsAPI.data.results[i].index}
+            />
+        ));
+
+        return newArr;
+    };
+
     return (
         <div className="spell-card-collection">
             <div>
@@ -57,20 +82,32 @@ export const SpellCardCollection = ({ type }: SpellCardCollectionPropsType) => {
                 )}
                 <small> Click on card to add / remove from favorites </small>
             </div>
-            <div className="spells-card-list">
-                {spellsAPI.data.results &&
-                    controlledSpellsRender().map((card) => (
-                        <div key={card.key}>{card}</div>
-                    ))}
-            </div>
-            <Pagination
-                defaultCurrent={pageData.page + 1}
-                total={spellsAPI.data.count}
-                pageSize={pageData.itemsPerPage}
-                responsive={true}
-                showSizeChanger={false}
-                onChange={handlePageChange}
-            />
+            {type === SpellCardCollectionEnum.all ? (
+                <div className="spells-card-list">
+                    {spellsAPI.data.results &&
+                        controlledSpellsRender().map((card) => (
+                            <div key={card.key}>{card}</div>
+                        ))}
+                </div>
+            ) : (
+                <div className="spells-card-list">
+                    {spellsAPI.data.results &&
+                        renderFavoriteSpells().map((card) => (
+                            <div key={card.key}>{card}</div>
+                        ))}
+                </div>
+            )}
+
+            {type === SpellCardCollectionEnum.all && (
+                <Pagination
+                    defaultCurrent={pageData.page + 1}
+                    total={spellsAPI.data.count}
+                    pageSize={pageData.itemsPerPage}
+                    responsive={true}
+                    showSizeChanger={false}
+                    onChange={handlePageChange}
+                />
+            )}
         </div>
     );
 };

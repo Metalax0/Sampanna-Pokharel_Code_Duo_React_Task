@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFavorite } from "../../../state-management/slices/favoriteSlice";
 import { AppDispatch, RootState } from "../../../state-management/store";
 import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+import { isIndexFavorite } from "../../../utils/isIndexFavorite";
 
 export const SpellCard = ({ url, index }: SpellCardProps) => {
     const spellsAPI = useAPI();
@@ -23,10 +24,6 @@ export const SpellCard = ({ url, index }: SpellCardProps) => {
         dispatch(setFavorite(index));
     };
 
-    const isIndexFavorite = (ind: string) => {
-        return favoriteStoreArr.includes(ind);
-    };
-
     return (
         <div className="spell-card" onClick={handleToggleFavorites}>
             {spellsAPI.isLoading && <Spin />}
@@ -34,7 +31,7 @@ export const SpellCard = ({ url, index }: SpellCardProps) => {
                 <>
                     <h2 className="spell-name">
                         {spellsAPI.data.name}{" "}
-                        {isIndexFavorite(index) ? (
+                        {isIndexFavorite(favoriteStoreArr, index) ? (
                             <HeartFilled />
                         ) : (
                             <HeartOutlined />
