@@ -7,7 +7,7 @@ export const LandingPage = () => {
     const spellsAPI = useAPI();
 
     useEffect(() => {
-        spellsAPI.API("GET", apiRoutes.fetchAllSpells);
+        // spellsAPI.API("GET", apiRoutes.fetchAllSpells);
     }, []);
 
     return (
