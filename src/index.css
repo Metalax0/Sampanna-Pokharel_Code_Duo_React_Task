@@ -6,8 +6,9 @@
 #root {
     margin: 0;
     padding: 0;
-    max-width: 1280px;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 :root {
@@ -27,6 +28,7 @@
     --bg-color: #ffa68d;
     --fg-color: #1c1c1c;
     --card-bg: #fab8a5;
+    --gradient-card-bg: linear-gradient(45deg, #fab8a5, #ddd6b4);
 }
 
 /* Color Schemes for Dark Theme */
@@ -34,6 +36,7 @@
     --bg-color: #1c1c1c;
     --fg-color: #ffa68d;
     --card-bg: #141313;
+    --gradient-card-bg: linear-gradient(45deg, #302b2b, #000000);
 }
 
 /* Antd Designs Overrides */

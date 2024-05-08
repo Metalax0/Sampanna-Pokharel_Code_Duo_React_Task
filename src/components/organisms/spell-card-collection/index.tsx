@@ -51,7 +51,7 @@ export const SpellCardCollection = () => {
                 total={spellsAPI.data.count}
                 pageSize={pageData.itemsPerPage}
                 responsive={true}
-                // showSizeChanger={false}
+                showSizeChanger={false}
                 onChange={handlePageChange}
             />
         </div>
