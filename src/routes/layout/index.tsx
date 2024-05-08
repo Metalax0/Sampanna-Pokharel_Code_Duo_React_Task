@@ -4,7 +4,7 @@ import "./style.css";
 
 export const Layout = () => {
     return (
-        <div>
+        <div className="layout">
             <Navbar />
             <Outlet />
         </div>
