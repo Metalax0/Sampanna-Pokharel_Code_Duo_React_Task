@@ -5,7 +5,16 @@ import { SpellCard } from "../../molecules/spell-card";
 import { apiRoutes } from "../../../api/apiRoutes";
 import { Pagination, Spin } from "antd";
 
-export const SpellCardCollection = () => {
+export enum SpellCardCollectionEnum {
+    all = "all",
+    favorites = "favorites",
+}
+
+export interface SpellCardCollectionPropsType {
+    type: SpellCardCollectionEnum;
+}
+
+export const SpellCardCollection = ({ type }: SpellCardCollectionPropsType) => {
     const spellsAPI = useAPI();
     const [pageData, setPageData] = useState({
         page: 0,
@@ -31,15 +40,23 @@ export const SpellCardCollection = () => {
             i < spellsAPI.data.count;
             i++
         ) {
-            const { name, url } = spellsAPI.data.results[i];
-            cardArr.push(<SpellCard key={url + i} name={name} url={url} />);
+            const { url, index } = spellsAPI.data.results[i];
+            cardArr.push(<SpellCard key={url + i} url={url} index={index} />);
         }
         return cardArr;
     };
 
     return (
         <div className="spell-card-collection">
-            {spellsAPI.isLoading && <Spin size="large" />}
+            <div>
+                {spellsAPI.isLoading && <Spin size="large" />}
+                {type === SpellCardCollectionEnum.all ? (
+                    <h1> All Spells </h1>
+                ) : (
+                    <h1> Favorite Spells </h1>
+                )}
+                <small> Click on card to add / remove from favorites </small>
+            </div>
             <div className="spells-card-list">
                 {spellsAPI.data.results &&
                     controlledSpellsRender().map((card) => (

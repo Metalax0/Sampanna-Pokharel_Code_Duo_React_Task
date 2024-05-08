@@ -4,19 +4,25 @@ import { useEffect } from "react";
 import { useAPI } from "../../../hooks/useAPI";
 import { Spin } from "antd";
 
-export const SpellCard = ({ name, url }: SpellCardProps) => {
+export const SpellCard = ({ url, index }: SpellCardProps) => {
     const spellsAPI = useAPI();
 
     useEffect(() => {
         spellsAPI.API("GET", url);
     }, []);
 
+    const handleToggleFavorites = () => {
+        // dispatch
+        // add to localstorage
+        // localStorage.setItem("");
+    };
+
     return (
-        <div className="spell-card">
-            <h2 className="spell-name">{name}</h2>
+        <div className="spell-card" onClick={handleToggleFavorites}>
             {spellsAPI.isLoading && <Spin />}
             {spellsAPI.data.name && (
                 <>
+                    <h2 className="spell-name">{spellsAPI.data.name}</h2>
                     <div className="spell-details-row">
                         <div className="spell-details-col">
                             <p className="spell-stat">
@@ -62,7 +68,9 @@ export const SpellCard = ({ name, url }: SpellCardProps) => {
                                 <div className="spell-stat-sub">
                                     {spellsAPI.data.components.map(
                                         (item: string, i: number) => (
-                                            <span key={name + i}>{item}</span>
+                                            <span key={spellsAPI.data.name + i}>
+                                                {item}
+                                            </span>
                                         )
                                     )}
                                 </div>

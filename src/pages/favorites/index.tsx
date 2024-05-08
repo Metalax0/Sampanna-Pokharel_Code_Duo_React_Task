@@ -4,10 +4,10 @@ import {
     SpellCardCollectionEnum,
 } from "../../components/organisms/spell-card-collection";
 
-export const LandingPage = () => {
+export const FavoritesPage = () => {
     return (
-        <div className="landing-page">
-            <SpellCardCollection type={SpellCardCollectionEnum.all} />
+        <div className="favorites-page">
+            <SpellCardCollection type={SpellCardCollectionEnum.favorites} />
         </div>
     );
 };

@@ -1,4 +1,4 @@
 export interface SpellCardProps {
-    name: string;
     url: string;
+    index: string;
 }
