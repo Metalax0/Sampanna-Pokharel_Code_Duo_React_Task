@@ -3,13 +3,17 @@ import { SpellCardProps } from "../../../types/spellCardPropsType";
 import { useEffect } from "react";
 import { useAPI } from "../../../hooks/useAPI";
 import { Spin } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFavorite } from "../../../state-management/slices/favoriteSlice";
-import { AppDispatch } from "../../../state-management/store";
+import { AppDispatch, RootState } from "../../../state-management/store";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
 export const SpellCard = ({ url, index }: SpellCardProps) => {
     const spellsAPI = useAPI();
     const dispatch = useDispatch<AppDispatch>();
+    const favoriteStoreArr = useSelector(
+        (state: RootState) => state.favorite.arr
+    );
 
     useEffect(() => {
         spellsAPI.API("GET", url);
@@ -19,12 +23,23 @@ export const SpellCard = ({ url, index }: SpellCardProps) => {
         dispatch(setFavorite(index));
     };
 
+    const isIndexFavorite = (ind: string) => {
+        return favoriteStoreArr.includes(ind);
+    };
+
     return (
         <div className="spell-card" onClick={handleToggleFavorites}>
             {spellsAPI.isLoading && <Spin />}
             {spellsAPI.data.name && (
                 <>
-                    <h2 className="spell-name">{spellsAPI.data.name}</h2>
+                    <h2 className="spell-name">
+                        {spellsAPI.data.name}{" "}
+                        {isIndexFavorite(index) ? (
+                            <HeartFilled />
+                        ) : (
+                            <HeartOutlined />
+                        )}
+                    </h2>
                     <div className="spell-details-row">
                         <div className="spell-details-col">
                             <p className="spell-stat">

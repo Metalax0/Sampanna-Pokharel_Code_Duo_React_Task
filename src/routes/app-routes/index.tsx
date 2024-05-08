@@ -8,14 +8,19 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../state-management/store";
 import { changeTheme } from "../../utils/themeToggle";
 import { ThemeEnum } from "../../types/uiSliceType";
+import { setFavoriteBulk } from "../../state-management/slices/favoriteSlice";
 
 export const AppRoutes = () => {
     const dispatch = useDispatch<AppDispatch>();
 
-    // Initial Operations (making data persist)
+    // Initial Operations (loading persisted data)
     useEffect(() => {
         const theme = localStorage.getItem("theme");
-        changeTheme(theme as ThemeEnum, dispatch);
+        const favoriteArr = JSON.parse(
+            localStorage.getItem("favorite") as string
+        );
+        if (theme) changeTheme(theme as ThemeEnum, dispatch);
+        if (favoriteArr) dispatch(setFavoriteBulk(favoriteArr));
     }, []);
 
     return (

@@ -17,7 +17,6 @@ export const handleFavoriteAddRemove = (
     state: FavoriteSliceType,
     newData: string
 ) => {
-    console.log("test");
     const newArr = [...state.arr];
     const index = state.arr.indexOf(newData);
     if (index !== -1) {
@@ -25,6 +24,7 @@ export const handleFavoriteAddRemove = (
     } else {
         newArr.push(newData);
     }
+    localStorage.setItem("favorite", JSON.stringify(newArr));
     return newArr;
 };
 
@@ -41,9 +41,19 @@ const favoriteOptions: CreateSliceOptions = {
                 arr: handleFavoriteAddRemove(state, action.payload),
             };
         },
+        // replaces array entirely (for initial app persist data load)
+        setFavoriteBulk: (
+            state: FavoriteSliceType,
+            action: PayloadAction<FavoriteSliceType>
+        ) => {
+            return {
+                ...state,
+                arr: action.payload,
+            };
+        },
     },
 };
 
 const favoriteSlice = createSlice(favoriteOptions);
-export const { setFavorite } = favoriteSlice.actions;
+export const { setFavorite, setFavoriteBulk } = favoriteSlice.actions;
 export default favoriteSlice.reducer;
